@@ -6,18 +6,21 @@
 /*   By: slangero <slangero@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:40:05 by slangero          #+#    #+#             */
-/*   Updated: 2024/07/17 12:29:26 by slangero         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:46:31 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <errno.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <errno.h>
+#include <string.h>
+#include <fcntl.h>
+#include <stdarg.h>
 
 
 
