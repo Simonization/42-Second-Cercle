@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 21:49:40 by slangero          #+#    #+#             */
-/*   Updated: 2024/07/25 22:26:25 by slangero         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:07:00 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,27 @@ void	error_exit(char *message)
 	exit(1);
 }
 
-void	execute_command(char *command, char **envp)
+void	**parse_argument(char *command, int *arg_count)
 {
 	char	**args;
-	int		arg_count;
 	char	*token;
+
+	*arg_count = 0;
+	char *token = strtok(command, " ");
 
 	while (token != NULL)
 	{
-		arg_count++;
-		args = realloc(args, sizeof(char *) * arg_count);
-		args[arg_count - 1] = token;
+		(*arg_count)++;
+		args = realloc(args, sizeof(char *) * *arg_count);
+		args[*arg_count - 1] = token;
 		token = strtok(NULL, " ");
 	}
 	args = realloc(args, sizeof(char *) * (arg_count + 1));
 	args[arg_count] = NULL;
+}
 
+char *find_executable(char *command)
+{
 	char *path = getenv("PATH");
     char *path_copy = strdup(path);
     char *dir = strtok(path_copy, ":");

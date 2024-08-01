@@ -7,14 +7,22 @@
 #include <errno.h>
 
 
-//*********** 7 Practical use case for pipes
+//*********** 8 Introduction to FIFO
+
+
+//*************/
+
+
+/*********** 7 Practical use case for pipes
 
 int	main(int argc, char *argv[])
 {
-	int	array[] = {1, 2, 3, 4, 1, 2, };
-	int	arraySize = sizeof(arr) / sizeof(int);
+	int	start;
+	int	end;
+	int	array[] = {1, 2, 3, 4, 1, 2};
+	int	arraySize = sizeof(array) / sizeof(int);
 	int fd[2];
-	if pipe(fd) == -1)
+	if (pipe(fd) == -1)
 		return (1);
 
 	int	id = fork();
@@ -30,18 +38,43 @@ int	main(int argc, char *argv[])
 		start = arraySize / 2;
 		end = arraySize;
 	}
-	while(i < end)
-	{
-		i = start;
-		i++;
-	}
+
 	int sum = 0;
 	int	i;
+	i = start;
+	while(i < end)
+	{
+		sum += array[i];
+		i++;
+	}
+	
+	printf("Calculated partial sum: %d\n", sum);	
 
+	if (id == 0)
+	{
+		close(fd[0]);
+		if(write(fd[1], &sum, sizeof(sum)) == -1)
+			return(3);
+		close(fd[1]);
+	}
+	else
+	{
+		int	SumFromChild;
+		close(fd[1]);
+		if(read(fd[0], &SumFromChild, sizeof(SumFromChild)) == -1)
+			return (4);
+	}
+		close(fd[0]);
+
+		int	TotalSum = sum + SumFromChild;
+		printf("Total sum is %d\n", TotalSum);
+	// see line+12: we wrote to, in child porcess, you have to wait for child processes to finish
+		wait(NULL);
+	}	
 	return (0);
 }
 
-//*****
+/*****
 
 /****** 6 Communicating betweenprocesses
 
