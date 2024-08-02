@@ -96,7 +96,7 @@ int	main(int argc, char *argv[], char **envp)
 		if (dup2(fd[0], STDIN_FILENO) == -1)
 			error_exit("Error redirecting input from pipe");
 		close(fd[0]);
-		int output_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		output_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (output_fd == -1)
 			error_exit("Error opening output file");
 		if (dup2(output_fd, STDOUT_FILENO) == -1)
