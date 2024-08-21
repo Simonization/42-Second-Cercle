@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 21:49:40 by slangero          #+#    #+#             */
-/*   Updated: 2024/07/29 16:07:00 by slangero         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:47:21 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,43 @@ void	**parse_argument(char *command, int *arg_count)
 
 char *find_executable(char *command)
 {
-	char *path = getenv("PATH");
-    char *path_copy = strdup(path);
-    char *dir = strtok(path_copy, ":");
+	char *path;
+    char *path_copy;
+    char *dir;
     char full_path[1024];
+
+	path = getenv("PATH");
+    path_copy = strdup(path);
+    dir = strtok(path_copy, ":");
 
 	while (dir != NULL)
 	{
-		snprintf(full_path, sizeof(full_path), "%s/%s", dir, args[0]);
+		snprintf(full_path, sizeof(full_path), "%s/%s", dir, command);
 		if (access(full_path, X_OK) == 0)
-			break ;
+			return full_path;
 		dir = strtok(NULL, ":");
 	}
-	if (dir == NULL)
-		error_exit("Command not found: %s", args[0]);
+	free(path_copy);
+	return NULL;
+}
+
+void execute_command(char *command, char **envp)
+{
+	int	arg_count;
+	char **args;
+	char	*full_path;
+
+	args = parse_arguments(command, &arg_count;
+	full_path = find_executable(args[0]);
+
+	if (full_path == NULL)
+		error_exit("Command not found");
+
 	if (execve(full_path, args, envp) == -1)
-		error_exit("Failed to execute command: %s", args[0]);
+		error_exit("Failed to execute command");
+
+	free(full_path);
+	free(args);
 }
 
 int	main(int argc, char *argv[], char **envp)
@@ -96,7 +117,7 @@ int	main(int argc, char *argv[], char **envp)
 		if (dup2(fd[0], STDIN_FILENO) == -1)
 			error_exit("Error redirecting input from pipe");
 		close(fd[0]);
-		output_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		int output_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (output_fd == -1)
 			error_exit("Error opening output file");
 		if (dup2(output_fd, STDOUT_FILENO) == -1)

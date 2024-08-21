@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slangero <slangero@student.s19.be>         +#+  +:+       +#+        */
+/*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:40:05 by slangero          #+#    #+#             */
-/*   Updated: 2024/07/25 21:46:31 by slangero         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:51:10 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,20 @@
 #include <string.h>
 #include <fcntl.h>
 #include <stdarg.h>
+#include "ft_printf/ft_printf.h"
 
-
-
+typedef struct s_pipex
+{
+    char    **argv;
+    char    **envp;
+    char    *infile;
+    char    *outfile;
+    char    **cmd1;
+    char    **cmd2;
+    int     pipe_fd[2];
+    pid_t   pid1;
+    pid_t   pid2;
+} t_pipex;
 
 /*********GNL
 char	*get_next_line(int fd);
