@@ -6,52 +6,110 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:29:18 by slangero          #+#    #+#             */
-/*   Updated: 2024/08/21 19:00:20 by slangero         ###   ########.fr       */
+/*   Updated: 2024/09/06 18:24:30 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void child_process(char **av, int *pipe_fd, char **env)
+void ft_free(char **table)
 {
-    int fd;
+    if (table == NULL)
+        return;
     
-    fd = open(av[0], O_RDONLY, 0777);
-    if (fd == -1)
+    int i = 0;
+    while (table[i] != NULL)
     {
-        ft_printf("%s", "file 1 invalid\n");
-        exit (0);
+        free(table[i]);
+        table[i] = NULL;
+        i++;
     }
-    dup2(fd, 0);
-    dup2(pipe_fd[1], 1);
-    close(pipe_fd[0]);
-    execute_command(av[1], env);
+    
+    free(table);
+    table = NULL;
 }
 
-void parent_process(char **av, int *pipe_fd, char **env)
+void first_cmd(char *cmd, char **env, int *fd, char *infile)
 {
-    int fd;
+    char    *path;
+    char    **split_cmd;
+    int     file_one;
     
-    fd = open(av[3], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-    if (fd == -1)
+    file_one = open(infile, O_RDONLY);
+    if (file_one == -1)
     {
-        ft_printf("%s", "file 2 invalid\n");
-        exit (0);
+        perror("Error opening file");
+        exit(1);
     }
-    dup2(fd, 1);
-    dup2(pipe_fd[0], 0);
-    close(pipe_fd[1]);
-    execute_command(av[2], env);
+    close(fd[0]);
+    dup2(file_one, STDIN_FILENO);
+    dup2(fd[1], STDOUT_FILENO);
+    close(fd[1]);
+    close(file_one);
+    split_cmd = ft_split(cmd, ' ');
+    path = execute_command(split_cmd[0], env);
+    execve(path, split_cmd, env);
+    printf("Error\n");
+    free(path);
+    //ft_free(split_cmd);
+    exit(1);
 }
 
-void execute_command(char cmd, char **env)
+void sec_cmd(char *cmd, char **env, int *fd, char *outfile)
 {
-    // cherche le bon path dans le env (prendre la bonne ligne) -> get_env
-    substrs 5 (PATH=)
-    // couper en petits bouts le path (ft_split entre le ":") et tester chaque petit bout -> get_path
-    if (execve(/*path du bout qui est bon */) == -1)
+    char    *path;
+    char    **split_cmd;
+    int     file_two;
+
+    file_two = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (file_two == -1)
     {
-        //free;
+        perror("Error opening file");
+        exit(1);
     }
+    close(fd[1]);
+    dup2(fd[0], STDIN_FILENO);
+    dup2(file_two, STDOUT_FILENO);
+    close(fd[0]);
+    close(file_two);
+    split_cmd = ft_split(cmd, ' ');
+    path = execute_command(split_cmd[0], env);
+    execve(path, split_cmd, env);
+    printf("Error\n");
+    free(path);
+    //ft_free(split_cmd);
+    exit(1);
+}
+
+void parent_process(char **av, char **env)
+{
+    int cmd1;
+    int cmd2;
+    int	fd[2];
+	
+    if (pipe(fd) == -1)
+	{
+		printf("an error occured while opening the pipe\n");
+        exit(2);
+	}
+    cmd1 = fork();
+    if (cmd1 == 0)
+    {
+        first_cmd(av[2], env, fd, av[1]);
+    }
+    else
+    {
+        wait(NULL);
+        cmd2 = fork();
+        if (cmd2 == 0)
+        {
+            sec_cmd(av[3], env, fd, av[4]);
+        }
+    }
+    close(fd[0]);
+    close(fd[1]);
     
+    wait(NULL);
+
+    // tout free
 }

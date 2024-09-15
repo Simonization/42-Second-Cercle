@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 		int		x;
 		printf("input a number: ");
 		scanf("%d", &x);
-		if (write(fd[1], &x ,sizeof(int)) == -1)
+		if (write(fd[1], &x , sizeof(int)) == -1)
 		{
 			printf("an error occured while writing to the pipe\n");
 			return (2);

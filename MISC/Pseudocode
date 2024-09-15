@@ -1,0 +1,37 @@
+int main()
+
+
+ - check if 5 args
+ - read from args
+    - find executable
+     -- find env
+     -- find PATH line in env
+        - strcmp
+     -- split path with ':'
+     -- add / to your command (strjoin)
+     -- add /command to your path (strjoin)
+    - access executable
+* check if empty command arg
+
+
+- execute the command using execve
+
+
+ - create pipe
+ - create child 1
+   - cf infra
+    
+ - create child 2
+    - cf infra
+
+child1
+  close pipe fd0  
+  redirect stdin to argv1
+  redirect stdout to pipe write == pipe1
+  exec /bin/ls
+
+child2
+  close pipe
+  redirect stdin to read == pipe0
+  redirect stdout to 
+  

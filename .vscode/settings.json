@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "printf_env": "c",
+        "unistd.h": "c",
+        "pipex.h": "c"
+    }
+}
