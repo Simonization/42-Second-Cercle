@@ -35,3 +35,55 @@ child2
   redirect stdin to read == pipe0
   redirect stdout to 
   
+#####################################
+
+Program start (main.c):
+
+The program checks if the correct number of arguments (5) is provided.
+If correct, it calls the parent_process function with the arguments and environment variables.
+
+
+Parent process (process.c):
+
+Creates a pipe using pipe().
+Forks to create the first child process (cmd1).
+Waits for the first child to complete.
+Forks again to create the second child process (cmd2).
+Closes both ends of the pipe and waits for the second child to complete.
+
+
+First child process (process.c):
+
+Opens the input file (file1).
+Redirects stdin to the input file.
+Redirects stdout to the write end of the pipe.
+Closes unnecessary file descriptors.
+Executes the first command (cmd1) using execve().
+
+
+Second child process (process.c):
+
+Opens the output file (file2). 
+Redirects stdin to the read end of the pipe.
+Redirects stdout to the output file.
+Closes unnecessary file descriptors.
+Executes the second command (cmd2) using execve().
+
+
+Command execution (execute_command.c):
+
+Searches for the command in the PATH environment variable.
+Constructs the full path to the executable.
+Returns the path if the command is found and executable.
+
+
+Error handling:
+
+The program checks for errors when opening files, creating pipes, and forking processes.
+If an error occurs, it prints an error message and exits with an appropriate status code.
+
+
+Memory management:
+
+The program uses dynamic memory allocation for storing command arguments and paths.
+There are some memory leaks in the current implementation that should be addressed

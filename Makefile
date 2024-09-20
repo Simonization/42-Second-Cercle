@@ -6,7 +6,7 @@
 #    By: slangero <slangero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/05 11:00:32 by slangero          #+#    #+#              #
-#    Updated: 2024/09/05 13:38:27 by slangero         ###   ########.fr        #
+#    Updated: 2024/09/20 16:48:57 by slangero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,6 @@ SRCS = main.c \
 
 NAME = pipex
 
-LIB = ft
-LIB_DIR = /Users/slangero/0_libft
-LIB_FLAGS = -L$(LIB_DIR) -l$(LIB)
-LIB_INC = $(LIB_DIR)
-
-INC_FLAGS = -I$(LIB_INC)
-
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
@@ -44,7 +37,7 @@ RM = rm -f
 	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_FLAGS) $(INC_FLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 all: $(NAME)
 

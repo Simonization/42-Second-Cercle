@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slangero <slangero@student.s19.be>         +#+  +:+       +#+         #
+#    By: slangero <slangero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 15:21:14 by slangero          #+#    #+#              #
-#    Updated: 2024/07/16 21:09:46 by slangero         ###   ########.fr        #
+#    Updated: 2024/09/20 15:27:44 by slangero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ all: ${NAME}
 
 ${NAME}: ${OBJS}
 	ar rcs ${NAME} ${OBJS}
-	@echo "libft has compiled successfully"
 
 %.o: %.c
 	${GCC} ${CFLAGS} -c $^ -o $@ 
