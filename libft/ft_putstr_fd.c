@@ -1,46 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_charstr.c                                    :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 13:17:33 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:56:00 by slangero         ###   ########.fr       */
+/*   Created: 2024/05/02 17:53:42 by slangero          #+#    #+#             */
+/*   Updated: 2024/05/05 13:09:11 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
 
-int	print_char(char c)
+void	ft_putstr_fd(char *s, int fd)
 {
-	ssize_t	result;
+	int	i;
 
-	result = write (1, &c, 1);
-	if (result == -1)
-		return (-1);
-	return (1);
-}
-
-int	print_str(char *s)
-{
-	int		i;
-	ssize_t	result;
-
-	i = 0;
 	if (!s)
-	{
-		result = write (1, "(null)", 6);
-		if (result == -1)
-			return (-1);
-		return (6);
-	}
+		return ;
+	i = 0;
 	while (s[i])
 	{
-		result = write (1, &s[i], 1);
-		if (result == -1)
-			return (-1);
+		write (fd, &s[i], 1);
 		i++;
 	}
-	return (i);
 }

@@ -5,74 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 17:12:30 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:20:13 by slangero         ###   ########.fr       */
+/*   Created: 2024/09/24 13:57:57 by slangero          #+#    #+#             */
+/*   Updated: 2024/09/25 20:02:12 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*execute_command(char *cmd, char **env)
+char	*find_executable_path(char *cmd, char **env)
 {
-	char	**table;
-	char	**path;
-	int		i;
-	char	*result;
+	char	**split_cmd;
+	char	**env_path;
+	char	*exec_path;
 
-	path = NULL;
-	i = 0;
-	while (env[i])
-	{
-		if (strncmp(env[i], "PATH=", 5) == 0)
-		{
-			table = ft_split(env[i], '=');
-			if (!table)
-				return (NULL);
-			path = ft_split(table[1], ':');
-			ft_free(table);
-			if (!path)
-				return (NULL);
-			break ;
-		}
-		i++;
-	}
-	if (!path)
-	{
-		ft_printf("%s\n", "PATH environment variable not found\n");
-		return (NULL);
-	}
-	result = access_path(path, cmd);
-	ft_free(path);
-	return (result);
+	split_cmd = ft_extract_cmd(cmd);
+	env_path = ft_extract_env_path(env);
+	exec_path = ft_search_env_path(split_cmd[0], env_path);
+	verify(exec_path, *split_cmd);
+	ft_free(split_cmd);
+	free(env_path);
+	return (exec_path);
 }
 
-char	*access_path(char **path, char *cmd)
+void	execute_command(char *cmd, char **env)
 {
-	char	*tmp;
-	char	*c_path;
-	int		i;
+	char	**split_cmd;
+	char	*exec_path;
 
-	i = 0;
-	tmp = ft_strjoin("/", cmd);
-	if (!tmp)
-		return (NULL);
-	while (path[i])
+	exec_path = find_executable_path(cmd, env);
+	if (!exec_path)
 	{
-		c_path = ft_strjoin(path[i], tmp);
-		if (!c_path)
-		{
-			free(tmp);
-			return (NULL);
-		}
-		if (access(c_path, X_OK) == 0)
-		{
-			ft_printf("Executable found: %s\n", c_path);
-			free(tmp);
-			return (c_path);
-		}
-		free(c_path);
-		i++;
+		exit(1);
 	}
-	free(tmp);
-	return (NULL);
+	split_cmd = ft_split(cmd, ' ');
+	if (!split_cmd)
+	{
+		perror("Error splitting command");
+		free(exec_path);
+		exit(1);
+	}
+	execve(exec_path, split_cmd, env);
+	perror("Error executing command");
+	free(exec_path);
+	ft_free(split_cmd);
+	exit(1);
 }

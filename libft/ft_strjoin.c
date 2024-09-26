@@ -1,46 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_charstr.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 13:17:33 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:56:00 by slangero         ###   ########.fr       */
+/*   Created: 2024/05/02 17:54:02 by slangero          #+#    #+#             */
+/*   Updated: 2024/09/20 17:56:56 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_char(char c)
-{
-	ssize_t	result;
-
-	result = write (1, &c, 1);
-	if (result == -1)
-		return (-1);
-	return (1);
-}
-
-int	print_str(char *s)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	int		i;
-	ssize_t	result;
+	int		j;
+	char	*dest;
 
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (dest == NULL)
+		return (NULL);
 	i = 0;
-	if (!s)
+	j = 0;
+	while (s1[i])
 	{
-		result = write (1, "(null)", 6);
-		if (result == -1)
-			return (-1);
-		return (6);
-	}
-	while (s[i])
-	{
-		result = write (1, &s[i], 1);
-		if (result == -1)
-			return (-1);
+		dest[i] = s1[i];
 		i++;
 	}
-	return (i);
+	while (s2[j])
+		dest[i++] = s2[j++];
+	dest[i] = '\0';
+	return (dest);
 }

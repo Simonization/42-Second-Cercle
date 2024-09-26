@@ -1,46 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_charstr.c                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 13:17:33 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:56:00 by slangero         ###   ########.fr       */
+/*   Created: 2024/05/02 17:54:19 by slangero          #+#    #+#             */
+/*   Updated: 2024/09/20 17:57:07 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_char(char c)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	ssize_t	result;
-
-	result = write (1, &c, 1);
-	if (result == -1)
-		return (-1);
-	return (1);
-}
-
-int	print_str(char *s)
-{
-	int		i;
-	ssize_t	result;
-
-	i = 0;
-	if (!s)
+	if (n == 0)
+		return (0);
+	while (*s1 && (*s1 == *s2) && n > 1)
 	{
-		result = write (1, "(null)", 6);
-		if (result == -1)
-			return (-1);
-		return (6);
+		s1++;
+		s2++;
+		n--;
 	}
-	while (s[i])
-	{
-		result = write (1, &s[i], 1);
-		if (result == -1)
-			return (-1);
-		i++;
-	}
-	return (i);
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }

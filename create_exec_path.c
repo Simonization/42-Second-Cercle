@@ -1,46 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_charstr.c                                    :+:      :+:    :+:   */
+/*   create_exec_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 13:17:33 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:56:00 by slangero         ###   ########.fr       */
+/*   Created: 2024/09/25 17:33:48 by slangero          #+#    #+#             */
+/*   Updated: 2024/09/26 11:50:10 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "pipex.h"
 
-int	print_char(char c)
+char	*create_full_path(const char *dir, const char *cmd)
 {
-	ssize_t	result;
+	char	*tmp;
+	char	*full_path;
 
-	result = write (1, &c, 1);
-	if (result == -1)
-		return (-1);
-	return (1);
+	tmp = ft_strjoin("/", cmd);
+	if (!tmp)
+		return (NULL);
+	full_path = ft_strjoin(dir, tmp);
+	free(tmp);
+	if (!full_path)
+		return (NULL);
+	return (full_path);
 }
 
-int	print_str(char *s)
+int	ft_check_if_executable(char *full_path)
 {
-	int		i;
-	ssize_t	result;
-
-	i = 0;
-	if (!s)
-	{
-		result = write (1, "(null)", 6);
-		if (result == -1)
-			return (-1);
-		return (6);
-	}
-	while (s[i])
-	{
-		result = write (1, &s[i], 1);
-		if (result == -1)
-			return (-1);
-		i++;
-	}
-	return (i);
+	if (access(full_path, X_OK) == 0)
+		return (1);
+	else
+		return (0);
 }
