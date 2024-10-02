@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:56 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/26 11:49:29 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/02 22:00:11 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,22 @@ void	ft_free(char **table)
 	table = NULL;
 }
 
-char	*verify(char *exec_path, char *split_cmd)
+char	*verify(char *exec_path)
 {
 	if (!exec_path)
 	{
-		ft_putstr_fd("Command not found: ", STDERR_FILENO);
-		ft_putstr_fd(&split_cmd[0], STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
-		//ft_free(&split_cmd);
+		perror(NULL);
+		exit(1);
 	}
 	if (access(exec_path, F_OK) == -1)
 	{
-		ft_putstr_fd("Error: File does not exist: ", STDERR_FILENO);
-		ft_putstr_fd(exec_path, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
-		//free(exec_path);
-		//ft_free(&split_cmd);
+		perror(NULL);
+		exit(1);
 	}
 	if (access(exec_path, X_OK) == -1)
 	{
-		ft_putstr_fd("Error: Permission denied: ", STDERR_FILENO);
-		ft_putstr_fd(exec_path, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
-		//free(exec_path);
-		//ft_free(&split_cmd);
+		perror(NULL);
+		exit(1);
 	}
 	return (NULL);
 }
-
-//void	ft_free_strv()

@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:58:37 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/25 17:54:50 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/02 22:00:18 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ char	*create_full_path(const char *dir, const char *cmd);
 int		ft_check_if_executable(char *full_path);
 
 void	ft_free(char **table);
-char	*verify(char *exec_path, char *split_cmd);
+char	*verify(char *exec_path);
 
 #endif

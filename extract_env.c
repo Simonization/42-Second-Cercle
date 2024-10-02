@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:12:30 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/26 11:49:10 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/02 22:01:23 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*ft_search_env_path(char *cmd, char **env_path)
 	while (env_path[i])
 	{
 		full_path = create_full_path(env_path[i], cmd);
-		//fprintf(stderr, "the executable is %s\n", full_path);
 		if (!full_path)
 			return (NULL);
 		if (ft_check_if_executable(full_path))
@@ -66,6 +65,10 @@ char	*ft_search_env_path(char *cmd, char **env_path)
 	return (NULL);
 }
 
+
+/*
+	fprintf(stderr, "the executable is %s\n", full_path);
+*/
 /*
 	- split cmd --> find path --> prepend path to cmd --> check if exec
 */
