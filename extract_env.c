@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:12:30 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/02 22:01:23 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:32:22 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ char	*ft_search_env_path(char *cmd, char **env_path)
 {
 	char	*full_path;
 	int		i;
+	int		access_flag;
 
+	access_flag = 0;
 	i = 0;
 	while (env_path[i])
 	{
@@ -59,12 +61,15 @@ char	*ft_search_env_path(char *cmd, char **env_path)
 			return (NULL);
 		if (ft_check_if_executable(full_path))
 			return (full_path);
+		if (errno == EACCES)
+			access_flag = 1;
 		free(full_path);
 		i++;
 	}
+	if (access_flag == 1)
+		errno = EACCES;
 	return (NULL);
 }
-
 
 /*
 	fprintf(stderr, "the executable is %s\n", full_path);

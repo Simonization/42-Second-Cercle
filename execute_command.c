@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:57:57 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/02 22:00:39 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:20:42 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ char	*find_executable_path(char *cmd, char **env)
 	return (exec_path);
 }
 
+void	if_full_path_execute(char **split_cmd, char **env)
+{
+	if (access(split_cmd[0], F_OK) == 0)
+	{
+		if (access(split_cmd[0], X_OK) == 0)
+		{
+			execve(split_cmd[0], split_cmd, env);
+		}
+		else
+		{
+			free(split_cmd);
+			perror(NULL);
+			exit(1);
+		}
+	}
+}
+
 void	execute_command(char *cmd, char **env)
 {
 	char	**split_cmd;
@@ -38,8 +55,7 @@ void	execute_command(char *cmd, char **env)
 		perror("Error splitting command");
 		exit(1);
 	}
-	if (access(split_cmd[0], X_OK) == 0)
-		execve(split_cmd[0], split_cmd, env);
+	if_full_path_execute(split_cmd, env);
 	exec_path = find_executable_path(cmd, env);
 	if (!exec_path)
 	{
