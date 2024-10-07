@@ -6,11 +6,11 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:54:02 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:56:56 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:22:54 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {

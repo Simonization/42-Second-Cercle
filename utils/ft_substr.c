@@ -6,11 +6,11 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:45:16 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:57:13 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:22:24 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {

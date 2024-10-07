@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:58:37 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/02 22:00:18 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:17:37 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <stdarg.h>
-# include "libft.h"
+# include "utils.h"
 # include "ft_printf.h"
 
 void	first_fork(char *command, char *infile, char **env, int *fd);

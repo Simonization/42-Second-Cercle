@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:57:57 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/07 18:25:26 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:16:42 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	execute_command(char *cmd, char **env)
 	exec_path = find_executable_path(cmd, env);
 	if (!exec_path)
 	{
+		free(split_cmd);
 		exit(1);
 	}
 	execve(exec_path, split_cmd, env);

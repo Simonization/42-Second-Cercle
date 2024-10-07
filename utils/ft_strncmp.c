@@ -6,11 +6,11 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:54:19 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:57:07 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:22:35 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

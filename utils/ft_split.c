@@ -6,12 +6,12 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:45:42 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:56:44 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:23:09 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
+#include "utils.h"
 
 int	word_count(const char *str, char sep)
 {

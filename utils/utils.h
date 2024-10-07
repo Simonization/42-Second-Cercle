@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:49:57 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 17:57:27 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:22:14 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef UTILS_H
+# define UTILS_H
 // INCLUDES
 # include <unistd.h>
 # include <stdlib.h>

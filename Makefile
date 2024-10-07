@@ -6,7 +6,7 @@
 #    By: slangero <slangero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/05 11:00:32 by slangero          #+#    #+#              #
-#    Updated: 2024/10/06 17:50:12 by slangero         ###   ########.fr        #
+#    Updated: 2024/10/07 20:18:06 by slangero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ UTILS_SRCS =	utils/ft_strlen.c \
 				utils/ft_strdup.c \
 				utils/ft_putstr_fd.c \
 
-SRCS = $(PIPEX_SRCS) $(PRINTF_SRCS) $(LIBFT_SRCS) 
+SRCS = $(PIPEX_SRCS) $(PRINTF_SRCS) $(UTILS_SRCS) 
 
 OBJS = $(SRCS:.c=.o)
 
@@ -41,7 +41,7 @@ NAME = pipex
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
-INC = -I. -Ift_printf -Ilibft
+INC = -I. -Ift_printf -Iutils
 
 RM = rm -f
 

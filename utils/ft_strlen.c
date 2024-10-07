@@ -6,11 +6,11 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:06:35 by slangero          #+#    #+#             */
-/*   Updated: 2024/09/20 18:23:01 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:22:45 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
 size_t	ft_strlen(const char *str)
 {
