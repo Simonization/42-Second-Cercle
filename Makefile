@@ -6,7 +6,7 @@
 #    By: slangero <slangero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/05 11:00:32 by slangero          #+#    #+#              #
-#    Updated: 2024/09/25 17:43:46 by slangero         ###   ########.fr        #
+#    Updated: 2024/10/06 17:50:12 by slangero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,13 @@ PRINTF_SRCS =	ft_printf/ft_printf.c \
 				ft_printf/print_nbr.c \
 				ft_printf/print_pointer.c \
 
-LIBFT_SRCS =	libft/ft_strlen.c \
-				libft/ft_split.c libft/ft_strjoin.c libft/ft_strncmp.c \
-				libft/ft_substr.c \
-				libft/ft_strdup.c \
-				libft/ft_putstr_fd.c
+UTILS_SRCS =	utils/ft_strlen.c \
+				utils/ft_split.c \
+				utils/ft_strjoin.c \
+				utils/ft_strncmp.c \
+				utils/ft_substr.c \
+				utils/ft_strdup.c \
+				utils/ft_putstr_fd.c \
 
 SRCS = $(PIPEX_SRCS) $(PRINTF_SRCS) $(LIBFT_SRCS) 
 

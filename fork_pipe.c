@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:13:17 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/03 19:24:58 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:27:09 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ void	redirection_io_second(int *fd, const char *outfile)
 		exit(1);
 	}
 	close(fd[1]);
-	dup2(fd[0], STDIN_FILENO);
-	dup2(file_two, STDOUT_FILENO);
+	if (dup2(fd[0], STDIN_FILENO) == -1
+		|| dup2(file_two, STDOUT_FILENO) == -1)
+	{
+		perror("Error duplicating file descriptor");
+		exit(1);
+	}
 	close(fd[0]);
 	close(file_two);
 }

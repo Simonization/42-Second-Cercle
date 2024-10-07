@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:57:57 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/03 19:20:42 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:25:26 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	execute_command(char *cmd, char **env)
 	split_cmd = ft_split(cmd, ' ');
 	if (!split_cmd)
 	{
+		free(split_cmd);
 		perror("Error splitting command");
 		exit(1);
 	}

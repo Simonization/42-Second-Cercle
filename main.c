@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:12:51 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/03 19:16:11 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/03 23:41:49 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ int	main(int ac, char **av, char **env)
 		ft_printf("%s\n", "Error occurred in parent process");
 		return (1);
 	}
-	system("leaks pipex");
 	return (0);
 }
