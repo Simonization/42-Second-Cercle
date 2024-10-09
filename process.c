@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:29:18 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/03 19:24:49 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:38:51 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ void	sec_cmd(char *cmd, char **env, int *fd, char *outfile)
 	execute_command(cmd, env);
 }
 
+void	second_fork(char *command, char *outfile, char **env, int *fd)
+{
+	pid_t	cmd2;
+
+	cmd2 = fork();
+	if (cmd2 == -1)
+	{
+		perror("Error forking second child");
+		exit(1);
+	}
+	else if (cmd2 == 0)
+		sec_cmd(command, env, fd, outfile);
+}
 void	first_fork(char *command, char *infile, char **env, int *fd)
 {
 	pid_t	cmd1;
@@ -38,20 +51,6 @@ void	first_fork(char *command, char *infile, char **env, int *fd)
 		first_cmd(command, env, fd, infile);
 }
 
-void	second_fork(char *command, char *outfile, char **env, int *fd)
-{
-	pid_t	cmd2;
-
-	cmd2 = fork();
-	if (cmd2 == -1)
-	{
-		perror("Error forking second child");
-		exit(1);
-	}
-	else if (cmd2 == 0)
-		sec_cmd(command, env, fd, outfile);
-}
-
 int	parent_process(char **av, char **env)
 {
 	int	fd[2];
@@ -63,8 +62,10 @@ int	parent_process(char **av, char **env)
 	}
 	first_fork(av[2], av[1], env, fd);
 	second_fork(av[3], av[4], env, fd);
-	close(fd[STDIN_FILENO]);
-	close(fd[STDOUT_FILENO]);
+	if (close(fd[STDIN_FILENO]) == -1)
+		perror(NULL);
+	if (close(fd[STDOUT_FILENO]) == -1)
+		perror(NULL);
 	wait(NULL);
 	wait(NULL);
 	return (0);

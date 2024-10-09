@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:57:57 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/07 20:16:42 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:19:16 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ char	*find_executable_path(char *cmd, char **env)
 
 	split_cmd = ft_extract_cmd(cmd);
 	env_path = ft_extract_env_path(env);
+	if (env_path == NULL)
+	{
+		free(env_path);
+		perror(NULL);
+		exit(1);
+	}
 	exec_path = ft_search_env_path(split_cmd[0], env_path);
 	verify(exec_path);
 	ft_free(split_cmd);
@@ -29,19 +35,16 @@ char	*find_executable_path(char *cmd, char **env)
 
 void	if_full_path_execute(char **split_cmd, char **env)
 {
-	if (access(split_cmd[0], F_OK) == 0)
+	if (access(split_cmd[0], X_OK) == 0 || split_cmd[0][0] == '/' )
 	{
-		if (access(split_cmd[0], X_OK) == 0)
-		{
-			execve(split_cmd[0], split_cmd, env);
-		}
-		else
-		{
-			free(split_cmd);
-			perror(NULL);
-			exit(1);
-		}
+		execve(split_cmd[0], split_cmd, env);
 	}
+	// else
+	// {
+	// 	free(split_cmd);
+	// 	perror(NULL);
+	// 	exit(1);
+	// }
 }
 
 void	execute_command(char *cmd, char **env)

@@ -6,14 +6,13 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:58:37 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/07 20:17:37 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:31:34 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/wait.h>
