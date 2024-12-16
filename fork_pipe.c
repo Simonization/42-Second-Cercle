@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:13:17 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/09 11:38:08 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:57:18 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	redirection_io_second(int *fd, const char *outfile)
 	int		file_two;
 
 	file_two = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	printf("salut\n");
 	if (file_two == -1)
 	{
 		perror("Error opening file");

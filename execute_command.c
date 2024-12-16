@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:57:57 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/09 12:19:16 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:49:18 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ void	if_full_path_execute(char **split_cmd, char **env)
 	{
 		execve(split_cmd[0], split_cmd, env);
 	}
-	// else
-	// {
-	// 	free(split_cmd);
-	// 	perror(NULL);
-	// 	exit(1);
-	// }
 }
 
 void	execute_command(char *cmd, char **env)

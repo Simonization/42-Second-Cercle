@@ -6,7 +6,7 @@
 /*   By: slangero <slangero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:29:18 by slangero          #+#    #+#             */
-/*   Updated: 2024/10/09 11:38:51 by slangero         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:49:53 by slangero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	second_fork(char *command, char *outfile, char **env, int *fd)
 	else if (cmd2 == 0)
 		sec_cmd(command, env, fd, outfile);
 }
+
 void	first_fork(char *command, char *infile, char **env, int *fd)
 {
 	pid_t	cmd1;
